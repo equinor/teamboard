@@ -1,0 +1,89 @@
+.repo-name {
+    /*background: lightgrey;*/
+    font-variant: small-caps;
+    font-weight: bold;
+    padding: 2px 2px 2px 2px;
+    margin: 2px 2px 2px 2px;
+}
+
+.repo-milestone {
+    background: lightgrey;
+    font-variant: small-caps;
+    font-weight: bold;
+    font-size: small;
+    border-radius: 4px;
+    padding: 2px 2px 2px 2px;
+    margin: 2px 2px 2px 2px;
+    /*float:right;*/
+}
+
+.repo-success {
+    background: #a5de6f;
+    font-variant: small-caps;
+    font-weight: bold;
+    font-size: small;
+    border-radius: 4px;
+    padding: 2px 2px 2px 2px;
+    margin: 2px 2px 2px 2px;
+    /*float:right;*/
+}
+
+.repo-failure {
+    background: #e68c8d;
+    font-variant: small-caps;
+    font-weight: bold;
+    font-size: small;
+    border-radius: 4px;
+    padding: 2px 2px 2px 2px;
+    margin: 2px 2px 2px 2px;
+    /*float:right;*/
+}
+
+.repo-in-progress {
+    background: #e3c119;
+    font-variant: small-caps;
+    font-weight: bold;
+    font-size: small;
+    border-radius: 4px;
+    padding: 2px 2px 2px 2px;
+    margin: 2px 2px 2px 2px;
+    /*float:right;*/
+}
+
+.repo-time {
+    font-size: small;
+    float: right;
+}
+
+.repo-project {
+    text-align: left;
+    padding-left: 2px;
+    padding-right: 2px;
+    text-indent: 5px;
+    -webkit-writing-mode: vertical-lr;
+    writing-mode: vertical-lr;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    float: right;
+    height: inherit;
+    color: #eee8d5;
+    min-height: inherit;
+
+    font-size: small;
+}
+
+.repo-block {
+    display: inline-block;
+    margin: 5px -1px 5px 0;
+    border: 1px solid black;
+    width: 100%;
+    background-color: hsl(0, 0%, 95%);
+    overflow: hidden;
+    box-shadow: 2px 2px 5px 0 #aaaaaa;
+
+    min-height: 55px;
+    max-height: 55px;
+
+}

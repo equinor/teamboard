@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="css/avatar.css"/>
+    <link rel="stylesheet" type="text/css" href="css/jira.css"/>
+    <link rel="stylesheet" type="text/css" href="css/achievement.css"/>
+    <link rel="stylesheet" type="text/css" href="css/repo.css"/>
+
+    <script src="js/jquery-3.2.1.min.js" type="text/javascript"></script>
+
+
+</head>
+
+<body>
+
+<div class="dashboard-column">
+    <div class="dashboard-element" style="width: 900px; !important">
+        <div class='dashboard-title'>Pull Requests</div>
+        <div id="pulls" class="wide-issue-column"></div>
+    </div>
+
+
+</div>
+
+<script language="javascript" type="text/javascript">
+    function fetchPulls() {
+        $('#pulls').load('/pr/{{ ",".join(pulls()) }}');
+        setTimeout(fetchPulls, 10000);
+    }
+    fetchPulls();
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,133 @@
+.avatar-small {
+    vertical-align: middle;
+    margin: 5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px 0 #aaaaaa;
+}
+
+.avatar-large {
+    margin: 5px;
+    vertical-align: middle;
+    border-radius: 20px;
+    width: 40px;
+    height: 40px;
+    box-shadow: 2px 2px 5px 0 #aaaaaa;
+}
+
+.avatar-larger {
+    margin: 5px;
+    vertical-align: middle;
+    border-radius: 30px;
+    width: 60px;
+    height: 60px;
+    box-shadow: 2px 2px 5px 0 #aaaaaa;
+}
+
+.avatar-medium {
+    vertical-align: middle;
+    margin: 5px;
+    width: 32px;
+    height: 32px;
+    border-radius: 16px;
+    box-shadow: 2px 2px 5px 0 #aaaaaa;
+}
+
+.avatar-medium-small {
+    vertical-align: middle;
+    margin: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 16px;
+    box-shadow: 2px 2px 5px 0 #aaaaaa;
+}
+
+
+.avatar-left {
+    float: left;
+}
+
+.avatar-right {
+    float: right;
+}
+
+.avatar-center {
+    vertical-align: top;
+    margin: auto;
+    text-align: center;
+    display: block;
+}
+
+.avatar-label {
+    margin-top: 5px;
+    vertical-align: top;
+    font-variant: small-caps;
+    font-size: small;
+    text-align: center;
+    width: 100%
+}
+
+.avatar-small-label {
+    margin-top: 5px;
+    vertical-align: top;
+    font-variant: small-caps;
+    font-size: x-small;
+    text-align: center;
+    width: 100%
+}
+
+.avatar-container {
+    margin: 5px 0 5px 0;
+    display: inline-block;
+    vertical-align: top;
+    width: 65px;
+    padding: 0 2px 0 2px;
+}
+
+.avatar-small-container {
+    margin: 5px 0 5px 0;
+    display: inline-block;
+    vertical-align: top;
+    width: 43px;
+    padding: 0 2px 0 2px;
+}
+
+.project {
+    display: inline-block;
+}
+
+.badge {
+    position: relative;
+}
+
+.project-icon {
+    vertical-align: middle;
+    margin: 5px;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px 0 #333;
+}
+
+.badge[data-count]:after {
+    content: attr(data-count);
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    font-size: .9em;
+    font-weight: bold;
+    background: #81b45c;
+    color: white;
+    width: 23px;
+    height: 23px;
+    text-align: center;
+    line-height: 23px;
+    border-radius: 50%;
+    border: 1px solid white;
+    box-shadow: 1px 1px 1px #333;
+}
+
+.error-badge:after {
+    background: red !important;
+}

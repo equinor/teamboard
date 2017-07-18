@@ -1,0 +1,18 @@
+<div class="repo-block">
+    <div class="repo-project" style="background-color: {{ projectColor(project(pr.repo))}}">
+        {{ project(pr.repo) }}
+    </div>
+
+    <div class="teamboard-right-group">
+        <img class="avatar-medium" src="{{ pr.avatar }}"/>
+    </div>
+
+    <div class="jira-issue-description">
+        <span class="repo-name">{{ pr.repo }}</span> <strong>#{{pr.number}}:</strong> {{ pr.title }}
+    </div>
+
+    <div class="jira-issue-description">
+        <span class="repo-failure">{{ pr.status }}</span>
+        <span class="repo-time">Last updated: {{ prettyTime(pr.updated) }}</span>
+    </div>
+</div>
