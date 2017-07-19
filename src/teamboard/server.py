@@ -15,21 +15,26 @@ app.config['TEAMBOARD_SETTINGS'] = {
     'projects': {
         'ERT': {
             'color': "#d33682",
+            'name': 'Everest',
             'repos': ['Statoil/libres', 'Statoil/libecl', 'Statoil/ert', 'Statoil/carolina']
         },
         'RES': {
             'color': "#eac117",
+            'name': 'Reservoir',
             'repos': ['Statoil/segyio', 'Statoil/segyviewer', 'Statoil/sunbeam']
         },
         'OPM': {
             'color': "#268bd2",
+            'name': 'Open Porous Media',
             'repos': ['OPM/opm-parser', 'OPM/opm-output']
         },
         'BYO': {
             'color': "#859900",
-            'repos': ['Statoil/teamboard', 'Statoil/pycmake']
+            'name': 'Ymse',
+            'repos': ['Statoil/teamboard', 'Statoil/pycmake', 'Statoil/cwrap']
         }
     },
+    'pr_columns': [('Everest', ['ERT']), ('Reservoir', ['RES']), ('Ymse', ['BYO', 'OPM'])],
     'default_project_color': '#93a1a1'
 }
 

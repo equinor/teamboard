@@ -216,9 +216,3 @@ body {
     -webkit-filter: drop-shadow( 2px 2px 2px #808080 );
 }
 
-.teamboard-right-group {
-    float: right;
-    height: inherit;
-    min-height: inherit;
-    padding: 0;
-}

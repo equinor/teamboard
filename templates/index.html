@@ -16,18 +16,25 @@
 <body>
 
 <div class="dashboard-column">
-    <div class="dashboard-element" style="width: 900px; !important">
-        <div class='dashboard-title'>Pull Requests</div>
-        <div id="pulls" class="wide-issue-column"></div>
-    </div>
+
+    {% for project in pr_columns %}
+        <div class="repo-container">
+            <div class='dashboard-title'>{{ project[0] }}</div>
+            <div id="pr_column_{{ project[0] }}" class="repo-column"></div>
+        </div>
+    {% endfor %}
+</div>
 
 
 </div>
 
 <script language="javascript" type="text/javascript">
     function fetchPulls() {
-        $('#pulls').load('/pr/{{ ",".join(pulls()) }}');
-        setTimeout(fetchPulls, 10000);
+        {% for project in pr_columns %}
+            $('#pr_column_{{ project[0] }}').load('/pr/{{ ",".join(pulls(",".join(project[1]))) }}');
+        {% endfor %}
+
+        setTimeout(fetchPulls, 30000);
     }
     fetchPulls();
 </script>

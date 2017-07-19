@@ -1,18 +1,34 @@
+{% macro statusStyle(status) -%}
+    {% if status == 'success' %}
+        repo-success
+    {% elif status == 'failure' %}
+        repo-failure repo-red-blink
+    {% else %}
+        repo-in-progress repo-yellow-blink
+    {% endif %}
+{%- endmacro %}
+
 <div class="repo-block">
-    <div class="repo-project" style="background-color: {{ projectColor(project(pr.repo))}}">
-        {{ project(pr.repo) }}
+    <div class="repo-group-avatar">
+        <img class="repo-avatar" src="{{ pr.avatar }}"/>
+
+        <div class="repo-project" style="background-color: {{ projectColor(project(pr.repo)) }}">
+            {{ project(pr.repo) }}
+        </div>
     </div>
 
-    <div class="teamboard-right-group">
-        <img class="avatar-medium" src="{{ pr.avatar }}"/>
-    </div>
+    <div class="repo-group-info">
+        <div class="repo-title">
+            {{ pr.repo }} #{{ pr.number }}:
+        </div>
 
-    <div class="jira-issue-description">
-        <span class="repo-name">{{ pr.repo }}</span> <strong>#{{pr.number}}:</strong> {{ pr.title }}
-    </div>
+        <div class="repo-description">
+            {{ pr.title }}
+        </div>
 
-    <div class="jira-issue-description">
-        <span class="repo-failure">{{ pr.status }}</span>
-        <span class="repo-time">Last updated: {{ prettyTime(pr.updated) }}</span>
+        <div class="repo-description">
+            <span class="repo-state {{ statusStyle(pr.status) }}">{{ pr.status }}</span>
+            <span class="repo-time">Last updated: {{ prettyTime(pr.updated) }}</span>
+        </div>
     </div>
 </div>
