@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/avatar.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/jira.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/achievement.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/repo.css"/>
+
+    <script src="/js/jquery-3.2.1.min.js" type="text/javascript"></script>
+</head>
+
+<body>
+
+<div class="dashboard-column">
+
+    {% for column in pr_columns %}
+        <div class="repo-container">
+            <div class='dashboard-title'>{{ column.name }}</div>
+            <div id="pr_column_{{ column.name }}" class="repo-column"></div>
+        </div>
+    {% endfor %}
+</div>
+
+
+</div>
+
+<script language="javascript" type="text/javascript">
+    function fetchPulls() {
+        {% for column in pr_columns %}
+            $('#pr_column_{{ column.name }}').load('/pr/{{ ",".join(pulls(",".join(column.projects))) }}');
+        {% endfor %}
+
+        setTimeout(fetchPulls, 60000);
+    }
+    fetchPulls();
+</script>
+
+</body>
+</html>

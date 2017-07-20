@@ -26,15 +26,37 @@ def check_rate_limits(self):
         return "Failed to check rate limits!"
 
 
-def get_status(self, owner, repo, pr):
+def get_ci_status(self, owner, repo, pr):
     sha = pr['head']['sha']
     status, pr_status = self.repos[owner][repo].commits[sha].status.get()
 
     if status != 200:
         teamboard_logger().warning("Unable to find status for PR #%s in repo: %s/%s" % (pr['number'], owner, repo))
-        teamboard_logger().debug("Status: %s - %s" % (status, self.getheaders()))
+        teamboard_logger().debug("Response status: %s - %s" % (status, self.getheaders()))
 
     return pr_status
+
+
+def get_review_status(self, owner, repo, pr):
+    number = pr['number']
+    status, review_status = self.repos[owner][repo].pulls[number].reviews.get()
+
+    if status != 200:
+        teamboard_logger().warning("Unable to find review status for PR #%s in repo: %s/%s" % (number, owner, repo))
+        teamboard_logger().debug("Response status: %s - %s" % (status, self.getheaders()))
+
+    return review_status
+
+
+def get_pr_comments(self, owner, repo, pr):
+    number = pr['number']
+    status, pr_comments = self.repos[owner][repo].issues[number].comments.get()
+
+    if status != 200:
+        teamboard_logger().warning("Unable to find comments for PR #%s in repo: %s/%s" % (number, owner, repo))
+        teamboard_logger().debug("Response status: %s - %s" % (status, self.getheaders()))
+
+    return pr_comments
 
 
 def get_pulls(self, owner, repo):
@@ -52,7 +74,9 @@ def get_pulls(self, owner, repo):
             teamboard_logger().debug("PR fetch status: %s - %s" % (status, self.getheaders()))
     else:
         for pr in pulls:
-            pr_status = get_status(self, owner, repo, pr)
+            pr_status = get_ci_status(self, owner, repo, pr)
+            review_status = get_review_status(self, owner, repo, pr)
+            pr_comments = get_pr_comments(self, owner, repo, pr)
 
             result.append({
                 'repo': pr['base']['repo']['full_name'],
@@ -61,6 +85,8 @@ def get_pulls(self, owner, repo):
                 'updated': pr['updated_at'],
                 'user': pr['user']['login'],
                 'avatar': pr['user']['avatar_url'],
+                'review_status': review_status,
+                'pr_comments': pr_comments,
                 'status': pr_status['state']
             })
     return result
@@ -89,6 +115,36 @@ def project_color(project):
         return settings['default_project_color']
 
 
+def emoji_for_review_status(review_status, pr_comments):
+    if len(review_status) == 0 and len(pr_comments) == 0:
+        return ""
+
+    APPROVED = '&#x1f44d;'  # Thumbs up
+    COMMENTED = '&#x1f4ac;'  # Talk bubble
+    DISMISSED = '&#x1f44e;'  # Thumbs down
+    PENDING = '&#1f40c;'  # Snail
+
+    state = None
+
+    if len(pr_comments) > 0:
+        state = COMMENTED
+
+    for review in review_status:
+        if review['state'] == 'COMMENTED':
+            if state is None:
+                state = COMMENTED
+        elif review['state'] == 'APPROVED':
+            state = APPROVED
+        elif review['state'] == 'PENDING':
+            state = PENDING
+        elif review['state'] == 'DISMISSED':
+            state = DISMISSED
+        else:
+            teamboard_logger().info("Unknown review state: %s" % review['state'])
+
+    return state if state is not None else ''
+
+
 @pr_app.route("/<path:repos>")
 def get_pull_requests(repos):
     """
@@ -99,7 +155,7 @@ def get_pull_requests(repos):
     g = GitHub(token=token)
 
     pull_requests = []
-    with ThreadPoolExecutor(max_workers=5) as tpe:
+    with ThreadPoolExecutor(max_workers=10) as tpe:
         futures = []
         for repo_name in repos.split(","):
             owner, repo = repo_name.split('/')
@@ -114,7 +170,9 @@ def get_pull_requests(repos):
     rendered_pr = ""
 
     for pr in pull_requests:
-        rt = render_template('pr.html', pr=pr, project=project, projectColor=project_color, prettyTime=pretty_date_since)
+        rt = render_template('pr.html', pr=pr, project=project,
+                             projectColor=project_color, prettyTime=pretty_date_since,
+                             reviewState=emoji_for_review_status)
         rendered_pr += rt
 
     return rendered_pr
@@ -125,3 +183,22 @@ def get_rates():
     token = current_app.config.get('GITHUB_TOKEN')
     g = GitHub(token=token)
     return check_rate_limits(g)
+
+
+def pulls(project_list):
+    project_list = project_list.split(",")
+    settings = current_app.config.get('TEAMBOARD_SETTINGS')
+
+    repos = []
+    projects = settings['projects']
+    for project in [p for p in projects if p in project_list]:
+        repos.extend(projects[project]['repos'])
+
+    return repos
+
+
+@pr_app.route("/")
+def index():
+    settings = current_app.config.get('TEAMBOARD_SETTINGS')
+    pr_columns = settings['pr_columns']
+    return render_template('github.html', pulls=pulls, pr_columns=pr_columns)

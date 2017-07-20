@@ -10,8 +10,13 @@
 
 <div class="repo-block">
     <div class="repo-group-avatar">
-        <img class="repo-avatar" src="{{ pr.avatar }}"/>
+        <div class="repo-group">
+            <img class="repo-avatar" src="{{ pr.avatar }}"/>
 
+            <div class="repo-review-state">
+                {{ reviewState(pr.review_status, pr.pr_comments)|safe }}
+            </div>
+        </div>
         <div class="repo-project" style="background-color: {{ projectColor(project(pr.repo)) }}">
             {{ project(pr.repo) }}
         </div>
