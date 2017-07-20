@@ -33,4 +33,14 @@ pr_columns:
       - OPM
       - misc
 
+achievements:
+  -
+    name: "&#x1f370;" # cake emoji
+    count: 91
+    since: 2017-06-01
+  -
+    name: "&#x1f355;&#x1f37a;" # beer and pizza emoji (cheers beer: &#x1f37b;)
+    count: 191
+    since: 2017-05-01
+
 default_project_color: "#93a1a1"

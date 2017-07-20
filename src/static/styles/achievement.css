@@ -69,3 +69,15 @@
 .green-blink {
     animation: green-blink 1.5s linear infinite;
 }
+
+@font-face {
+    font-family: "Noto Emoji Regular";
+    src: url('fonts/NotoColorEmoji.ttf') format('truetype');
+}
+
+.achievement-emoji {
+    font-family: "Noto Emoji Regular";
+    font-size: x-large;
+    vertical-align: middle;
+    margin-left: 10px;
+}
