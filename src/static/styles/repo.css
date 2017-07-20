@@ -84,6 +84,14 @@
     text-overflow: ellipsis;
 }
 
+.repo-group {
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+    vertical-align: top;
+    height: 100%;
+}
+
 .repo-group-avatar {
     display: inline-block;
     width: 67px;
@@ -95,7 +103,6 @@
     top: 0;
     right: 0;
     bottom: 0;
-
 }
 
 .repo-group-info {
@@ -103,7 +110,6 @@
     padding: 0;
     margin: 0;
     width: auto;
-    /*overflow: hidden;*/
     position: absolute;
     top: 0;
     left: 0;
@@ -161,18 +167,30 @@
 
 @keyframes repo-yellow-blink {
     0% {
-        background-color: #dede6f;
+        background-color: #e3c119;
     }
     50% {
-        background-color: #ffff91;
+        background-color: #ffeb91;
 
-        box-shadow: 0 0 2px 1px #ffffa8;
+        box-shadow: 0 0 2px 1px #ffefa8;
     }
     100% {
-        background-color: #dede6f;
+        background-color: #e3c119;
     }
 }
 
 .repo-yellow-blink {
     animation: repo-yellow-blink 2.5s linear infinite;
+}
+
+@font-face {
+    font-family: "Noto Emoji Regular";
+    src: url('fonts/NotoColorEmoji.ttf') format('truetype');
+}
+
+.repo-review-state {
+    font-family: "Noto Emoji Regular";
+    vertical-align: bottom;
+    text-align: center;
+    margin-top: 10px;
 }
