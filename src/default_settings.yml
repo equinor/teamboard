@@ -1,0 +1,36 @@
+projects:
+  segyio:
+    color: "#859900"
+    name: segyio
+    repos:
+      - Statoil/segyio
+      - Statoil/segyviewer
+
+  OPM:
+    color: "#268bd2"
+    name: Open Porous Media,
+    repos:
+      - OPM/opm-parser
+      - OPM/opm-output
+
+  misc:
+    color: "#eac117"
+    name: Other Projects
+    repos:
+      - Statoil/teamboard
+      - Statoil/pycmake
+      - Statoil/cwrap
+
+pr_columns:
+  -
+    name: SegyIO
+    projects:
+      - segyio
+
+  -
+    name: Miscellaneous
+    projects:
+      - OPM
+      - misc
+
+default_project_color: "#93a1a1"
