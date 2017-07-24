@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/ci.css"/>
     <link rel="stylesheet" type="text/css" href="/css/style.css"/>
     <link rel="stylesheet" type="text/css" href="/css/achievement.css"/>
 
@@ -16,18 +17,33 @@
         <div class='dashboard-title'>Achievements</div>
         <div id="achievements"></div>
     </div>
+
+    <div class="dashboard-element">
+        <div class='dashboard-title'>Build Status</div>
+        {% for build in ci %}
+            <div id="build_{{ build.name|idify }}"></div>
+        {% endfor %}
+    </div>
 </div>
 
 
 </div>
 
 <script language="javascript" type="text/javascript">
-    function fetchPulls() {
+    function fetchAchievements() {
         $('#achievements').load('/achievements');
-
-        setTimeout(fetchPulls, 60000);
+        setTimeout(fetchAchievements, 60000);
     }
-    fetchPulls();
+    fetchAchievements();
+
+    function fetchBuilds() {
+        {% for build in ci %}
+            $('#build_{{ build.name|idify }}').load('/ci/{{ build.name|urlencode }}');
+        {% endfor %}
+
+        setTimeout(fetchBuilds, 60000);
+    }
+    fetchBuilds();
 </script>
 
 </body>

@@ -1,0 +1,11 @@
+<div class="ci-status-group">
+    <div class="ci-bullet {{ build.status.style }}"></div>
+    <div class="ci-status-label">{{ build.name }}</div>
+
+    {% for job in build.status.jobs %}
+        <div class="ci-status-info-group">
+            <div class="ci-mini-bullet {{ job.style }}"></div>
+            <span class="">{{ job.name }}</span>
+        </div>
+    {% endfor %}
+</div>

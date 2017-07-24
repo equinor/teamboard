@@ -1,3 +1,5 @@
+from math import floor
+
 from random import random
 
 from flask import Blueprint, render_template
@@ -10,7 +12,7 @@ def calculate_achievement(achievement_setting):
     achievement = dict(achievement_setting)
 
     achievement['progress'] = round(random() * 200)
-    achievement['progress_percent'] = 100.0 * achievement['progress'] / achievement['count']
+    achievement['progress_percent'] = floor(100.0 * achievement['progress'] / achievement['count'])
     achievement['style'] = "green-blink" if achievement['progress_percent'] >= 100.0 else ""
 
     return achievement

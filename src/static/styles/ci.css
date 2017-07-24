@@ -1,0 +1,91 @@
+.ci-bullet {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border-radius: 8px;
+    box-shadow: 1px 1px 4px 0 #586e75;
+    margin: 8px;
+    vertical-align: middle;
+}
+
+.ci-mini-bullet {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 8px;
+    box-shadow: 1px 1px 4px 0 #586e75;
+    margin: 8px;
+    vertical-align: middle;
+}
+
+@keyframes ci-red-blink {
+    0% {
+        background-color: #e31a1c;
+    }
+    50% {
+        background-color: #ff7375;
+
+        /*box-shadow: 0 0 2px 1px #ff575a;*/
+    }
+    100% {
+        background-color: #e31a1c;
+    }
+}
+
+@keyframes ci-yellow-blink {
+    0% {
+        background-color: #e3c119;
+    }
+    50% {
+        background-color: #ffe057;
+    }
+    100% {
+        background-color: #e3c119;
+    }
+}
+
+.ci-red-blink {
+    animation: ci-red-blink 1.0s linear infinite;
+}
+
+.ci-yellow-blink {
+    animation: ci-yellow-blink 2.5s linear infinite;
+}
+
+.ci-status-fail {
+    /*background-color: #dc322f;*/
+    background-color: #e31a1c;
+}
+
+.ci-status-ok {
+    /*background-color: #859900;*/
+    background-color: #a5de6f;
+}
+
+.ci-status-working {
+    background-color: #e3c119;
+}
+
+.ci-status-testing {
+    background-color: #1bb1e3;
+}
+
+.ci-status-unknown {
+    background-color: #586e75;
+}
+
+.ci-status-label {
+    display: inline-block;
+}
+
+.ci-status-group {
+
+}
+
+.ci-status-info-group {
+    padding-left: 40px;
+    list-style: square;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}

@@ -20,83 +20,6 @@ body {
     display: none;
 }
 
-.bullet {
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    border-radius: 8px;
-    box-shadow: 1px 1px 4px 0 #586e75;
-    margin: 8px;
-    vertical-align: middle;
-}
-
-.mini-bullet {
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    border-radius: 8px;
-    box-shadow: 1px 1px 4px 0 #586e75;
-    margin: 8px;
-    vertical-align: middle;
-}
-
-@keyframes blink {
-    0% {
-        background-color: #e31a1c;
-    }
-    100% {
-        background-color: black;
-    }
-}
-
-@keyframes red-blink {
-    0% {
-        background-color: #e31a1c;
-    }
-    100% {
-        background-color: #660E0E;
-    }
-}
-
-@keyframes yellow-blink {
-    0% {
-        background-color: #e3c119;
-    }
-    100% {
-        background-color: #9a7f15;
-    }
-}
-
-.red-blink {
-    animation: red-blink 0.5s linear infinite;
-}
-
-.yellow-blink {
-    animation: yellow-blink 0.5s linear infinite;
-}
-
-.status-fail {
-    /*background-color: #dc322f;*/
-    background-color: #e31a1c;
-}
-
-.status-ok {
-    /*background-color: #859900;*/
-    background-color: #a5de6f;
-}
-
-.status-working {
-    background-color: #e3c119;
-}
-
-.status-testing {
-    background-color: #1bb1e3;
-}
-
-.status-unknown {
-    background-color: #586e75;
-}
-
 .dashboard-element {
     margin: 2px 2px 4px 2px;
     padding: 15px;
@@ -130,17 +53,6 @@ body {
     position: relative;
 }
 
-.jenkins-fails {
-    padding-left: 40px;
-    list-style: square;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-}
-
-.build-status-label {
-    display: inline-block;
-}
 
 /*@-webkit-keyframes issue-blink {*/
 /*0% {*/

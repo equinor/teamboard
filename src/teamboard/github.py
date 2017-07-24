@@ -150,7 +150,7 @@ def get_pull_requests(repos):
     """
     :type repos: string
     """
-    token = current_app.config.get('GITHUB_TOKEN')
+    token = current_app.config['TEAMBOARD_SETTINGS']['tokens']['github_token']
 
     g = GitHub(token=token)
 
@@ -180,7 +180,7 @@ def get_pull_requests(repos):
 
 @pr_app.route("/rate_limits")
 def get_rates():
-    token = current_app.config.get('GITHUB_TOKEN')
+    token = current_app.config['TEAMBOARD_SETTINGS']['tokens']['github_token']
     g = GitHub(token=token)
     return check_rate_limits(g)
 

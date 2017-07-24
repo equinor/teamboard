@@ -1,9 +1,10 @@
 import calendar
 import datetime
 import logging
+
+import os
 import pytz
 import dateutil.parser
-import os
 
 # create logger
 
@@ -28,19 +29,27 @@ def teamboard_logger():
     return logging.getLogger('teamboard_logger')
 
 
-def get_env(name, default_value):
-    value = os.getenv(name)
-
-    if value is None:
-        teamboard_logger().info("%s not set! Using '%s' as default." % (name, default_value))
-        value = default_value
-    else:
-        teamboard_logger().info("%s set to '%s'" % (name, value))
-
-    return value
+def _is_certificate(pem_file, folder='certificates'):
+    path = os.path.join(folder, pem_file)
+    return pem_file != 'cert.pem' and os.path.isfile(path) and pem_file.endswith('.pem')
 
 
+def bundle_certificates(name, path='certificates'):
+    pem_files = [pem_file for pem_file in os.listdir(path) if _is_certificate(pem_file, folder=path)]
+
+    bundle = b""
+    for pem_file in pem_files:
+        with open('certificates/%s' % pem_file, 'rb') as f:
+            bundle += f.read()
+
+    with open('certificates/%s.pem' % name, 'wb') as f:
+        f.write(bundle)
+
+
+#
+# Pretty print of time since
 # Borrowed from Django
+#
 
 TIMESINCE_CHUNKS = (
     (60 * 60 * 24 * 365, ('%d year', '%d years')),
@@ -118,7 +127,6 @@ def timesince(d, now=None, reversed=False):
         count = since // seconds
         if count != 0:
             break
-
 
     result = avoid_wrapping(name[1] % count if count > 1 else name[0] % count)
     if i + 1 < len(TIMESINCE_CHUNKS):

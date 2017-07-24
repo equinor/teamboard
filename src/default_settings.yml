@@ -43,4 +43,25 @@ achievements:
     count: 191
     since: 2017-05-01
 
+ci:
+  -
+    name: Travis
+    type: travis
+    url: travis-ci.org
+    repo: Statoil
+  -
+    name: OPM
+    type: travis
+    url: travis-ci.org
+    repo: OPM
+  -
+    name: OPM Cloud
+    type: jenkins
+    url: ci.opm-project.org
+    repo: All
+
+tokens:
+  github_token:
+  travis_token:
+
 default_project_color: "#93a1a1"
