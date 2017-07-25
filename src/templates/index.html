@@ -15,6 +15,7 @@
 
     <div class="dashboard-element">
         <div class='dashboard-title'>Achievements</div>
+        <div class="time"></div>
         <div id="achievements"></div>
     </div>
 
@@ -44,6 +45,30 @@
         setTimeout(fetchBuilds, 60000);
     }
     fetchBuilds();
+
+
+    var tick = false;
+
+    function updateTime() {
+        tick = !tick;
+        $('.time').text(function (index) {
+            var time = new Date();
+            var hours = time.getHours();
+            if (hours < 10) {
+                hours = "0" + hours;
+            }
+
+            var minutes = time.getMinutes();
+            if (minutes < 10) {
+                minutes = "0" + minutes;
+            }
+            return hours + (tick ? ":" : " ") + minutes;
+        });
+    }
+
+    setInterval(updateTime, 1000)
+
+
 </script>
 
 </body>
