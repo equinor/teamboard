@@ -53,4 +53,4 @@ if __name__ == '__main__':
 
     app.config['TEAMBOARD_SETTINGS'] = settings
 
-    app.run(debug=False)
+    app.run(debug=False, processes=5)
