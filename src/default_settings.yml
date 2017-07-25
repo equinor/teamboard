@@ -61,7 +61,8 @@ ci:
     repo: All
 
 tokens:
-  github_token:
-  travis_token:
+  github_token: # Create a personal access token on GitHub
+  travis_token: # Use the API to create a Travis token from a GitHub token
+  jira_token: # base64 encoded string of: username:password
 
 default_project_color: "#93a1a1"

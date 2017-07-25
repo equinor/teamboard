@@ -10,7 +10,7 @@ class Jenkins(API):
             api_url=kwargs.pop('api_url', '%s' % url),
             secure_http=True,
             extra_headers=extra_headers,
-            url_postfix='/api/json'
+            # url_postfix='/api/json'
         )
 
         self.setClient(Client(*args, **kwargs))

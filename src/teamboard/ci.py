@@ -86,7 +86,7 @@ def fetch_jenkins_ci(build):
     j = Jenkins(build['url'])
 
     repo = build['repo']
-    status, ci_data = j.view[repo].get()
+    status, ci_data = j.view[repo].api.json.get()
 
     if status != 200:
         teamboard_logger().warning("Unable to get CI status for repo %s" % repo)

@@ -20,7 +20,7 @@
 
 @keyframes ci-red-blink {
     0% {
-        background-color: #e31a1c;
+        background-color: #800f11;
     }
     50% {
         background-color: #ff7375;
@@ -28,19 +28,21 @@
         /*box-shadow: 0 0 2px 1px #ff575a;*/
     }
     100% {
-        background-color: #e31a1c;
+        background-color: #800f11;
+        /*background-color: #e31a1c;*/
     }
 }
 
 @keyframes ci-yellow-blink {
     0% {
-        background-color: #e3c119;
+        background-color: #806b0f;
     }
     50% {
         background-color: #ffe057;
     }
     100% {
-        background-color: #e3c119;
+        /*background-color: #e3c119;*/
+        background-color: #806b0f;
     }
 }
 
