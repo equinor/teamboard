@@ -1,0 +1,134 @@
+.issue-mini {
+    margin: 5px -1px 5px 0;
+    border: 1px solid black;
+    width: 100%;
+    background-color: hsl(0, 0%, 95%);
+    box-shadow: 2px 2px 5px 0 #aaaaaa;
+    height: 28px;
+}
+
+.issue-mini-project-color {
+    overflow: hidden;
+    float: right;
+    height: inherit;
+    width: 15px;
+    color: #eee8d5;
+}
+
+.issue-mini-project {
+    text-align: left;
+    margin-left: 5px;
+    padding: 2px;
+    font-variant: small-caps;
+    font-size: small;
+    display: inline-block;
+    text-transform: uppercase;
+}
+
+.issue-mini-description {
+    padding: 5px 5px 5px 5px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    vertical-align: top;
+    font-family: "Lucinda Grande", "Lucinda Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
+    font-size: 15px;
+}
+
+.issue-mini-flagged {
+    margin: 5px;
+    width: 18px;
+    height: 18px;
+    float: left;
+}
+
+.issue-group {
+    margin: 0;
+    padding: 0;
+}
+
+.issue-column-title {
+    text-align: center;
+    font-variant: small-caps;
+}
+
+.issue-column {
+    display: inline-block;
+    vertical-align: top;
+    max-width: 360px; /* 4 = 270, 3 = */
+    width: 360px;
+    padding: 10px;
+}
+
+.issue {
+    margin: 5px -1px 5px 0;
+    border: 1px solid black;
+    width: 100%;
+    background-color: hsl(0, 0%, 95%);
+    overflow: hidden;
+    box-shadow: 2px 2px 5px 0 #aaaaaa;
+
+    min-height: 50px;
+}
+
+.issue-description {
+    padding: 5px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    vertical-align: top;
+    font-family: "Lucinda Grande", "Lucinda Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
+    font-size: 15px;
+}
+
+.issue-project-color {
+    text-align: left;
+    padding-left: 2px;
+    padding-right: 2px;
+    text-indent: 5px;
+    -webkit-writing-mode: vertical-lr;
+    writing-mode: vertical-lr;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    float: right;
+    color: #eee8d5;
+    min-height: inherit;
+    width: 15px;
+    height: inherit;
+}
+
+.issue-project {
+    text-align: left;
+    /*text-indent: 5px;*/
+    margin-left: 5px;
+    padding: 2px;
+    font-variant: small-caps;
+    font-size: small;
+    display: inline-block;
+    text-transform: uppercase;
+    /*float: right;*/
+    /*height: inherit;*/
+    /*color: #eee8d5;*/
+    /*min-height: inherit;*/
+}
+
+@font-face {
+    font-family: "Noto Emoji Regular";
+    src: url('fonts/NotoColorEmoji.ttf') format('truetype');
+}
+
+.issue-flagged {
+    font-family: "Noto Emoji Regular";
+    font-size: smaller;
+    vertical-align: middle;
+    margin-left: 5px;
+}
+
+.issue-avatar-group {
+    float: right;
+    height: inherit;
+    min-height: inherit;
+    padding: 0;
+}

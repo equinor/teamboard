@@ -27,6 +27,8 @@ from teamboard.ci import ci_app
 from teamboard.static import initialize_static
 from teamboard.github import pr_app
 from teamboard.index import root_app
+from teamboard.team import team_app
+from teamboard.issues import issues_app
 
 app = Flask("The Teamboard", template_folder='templates', static_folder='static')
 
@@ -41,6 +43,8 @@ app.register_blueprint(root_app, url_prefix='/')
 app.register_blueprint(pr_app, url_prefix='/pr')
 app.register_blueprint(ach_app, url_prefix='/achievements')
 app.register_blueprint(ci_app, url_prefix='/ci')
+app.register_blueprint(team_app, url_prefix='/team')
+app.register_blueprint(issues_app, url_prefix='/issues')
 
 if __name__ == '__main__':
     settings_file = "default_settings.yml"
@@ -53,4 +57,4 @@ if __name__ == '__main__':
 
     app.config['TEAMBOARD_SETTINGS'] = settings
 
-    app.run(debug=False, processes=5)
+    app.run(debug=False, threaded=True)

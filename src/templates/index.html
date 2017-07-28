@@ -5,46 +5,27 @@
     <link rel="stylesheet" type="text/css" href="/css/ci.css"/>
     <link rel="stylesheet" type="text/css" href="/css/style.css"/>
     <link rel="stylesheet" type="text/css" href="/css/achievement.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/avatar.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/issues.css"/>
 
     <script src="/js/jquery-3.2.1.min.js" type="text/javascript"></script>
 </head>
 
-<body>
-
-<div class="dashboard-column">
-
-    <div class="dashboard-element">
-        <div class='dashboard-title'>Achievements</div>
-        <div class="time"></div>
-        <div id="achievements"></div>
-    </div>
-
-    <div class="dashboard-element">
-        <div class='dashboard-title'>Build Status</div>
-        {% for build in ci %}
-            <div id="build_{{ build.name|idify }}"></div>
-        {% endfor %}
-    </div>
-</div>
-
-
-</div>
 
 <script language="javascript" type="text/javascript">
     function fetchAchievements() {
         $('#achievements').load('/achievements');
-        setTimeout(fetchAchievements, 60000);
+        setTimeout(fetchAchievements, 60 * 1000);
     }
-    fetchAchievements();
+
 
     function fetchBuilds() {
         {% for build in ci %}
             $('#build_{{ build.name|idify }}').load('/ci/{{ build.name|urlencode }}');
         {% endfor %}
 
-        setTimeout(fetchBuilds, 60000);
+        setTimeout(fetchBuilds, 60 * 1000);
     }
-    fetchBuilds();
 
 
     var tick = false;
@@ -66,10 +47,94 @@
         });
     }
 
-    setInterval(updateTime, 1000)
 
+    function loadTeam() {
+        $('#team').load('/team');
+        setTimeout(loadTeam, 60 * 60 * 1000);
+    }
+
+    function fetchIssues() {
+        $('#todo').load('/issues/todo');
+        $('#in_progress').load('/issues/in_progress');
+        $('#ready_for_review').load('/issues/ready_for_review');
+        $('#in_review').load('/issues/in_review');
+        $('#external_test').load('/issues/external_test');
+        setTimeout(fetchIssues, 30 * 1000);
+    }
+
+    function initialize() {
+        fetchAchievements();
+        fetchBuilds();
+        setInterval(updateTime, 1000);
+        loadTeam();
+        fetchIssues();
+    }
 
 </script>
+
+<body onload="initialize();">
+
+<div class="dashboard-column">
+
+    <div class="dashboard-element">
+        <div class='dashboard-title'>Build Status</div>
+        {% for build in ci %}
+            <div id="build_{{ build.name|idify }}"></div>
+        {% endfor %}
+    </div>
+
+    <br/>
+
+    <div id="todo_box" class="dashboard-element">
+        <div class='dashboard-title'>To Do</div>
+        <div id="todo" class="issue-group"></div>
+    </div>
+
+
+</div>
+
+<div class="dashboard-column">
+
+    <div id="issues" class="dashboard-element" style="width: 1150px; !important">
+        <div class='dashboard-title'>Tasks in Progress</div>
+        <div class="time"></div>
+
+        <div class="issue-column">
+            <div class="issue-column-title">In Progress</div>
+            <div id="in_progress" class="issue-group"></div>
+        </div>
+
+        <div class="issue-column">
+            <div class="issue-column-title">Ready for Review</div>
+            <div id="ready_for_review" class="issue-group"></div>
+            <div style="height: 20px"></div>
+            <div class="issue-column-title">In Review</div>
+            <div id="in_review" class="issue-group"></div>
+        </div>
+
+        <div class="issue-column">
+            <div class="issue-column-title">External Test</div>
+            <div id="external_test" class="issue-group"></div>
+        </div>
+
+    </div>
+
+
+    <div class="dashboard-column">
+
+        <div class="dashboard-element">
+            <div class='dashboard-title'>Achievements</div>
+            <div id="achievements"></div>
+        </div>
+
+        <br/>
+
+        <div class="dashboard-element">
+            <div class='dashboard-title'>Team Members</div>
+            <div id='team' class="avatar-group"></div>
+        </div>
+    </div>
+
 
 </body>
 </html>

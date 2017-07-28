@@ -1,0 +1,12 @@
+{% for issue in issues %}
+    <div class="issue-mini">
+        <div class="issue-mini-project-color" style="background-color: {{ issue.color }}"></div>
+
+        {% if show_avatar %}
+            <img class="avatar-small avatar-right" src="{{ issue.assignee_avatar }}"/>
+        {% endif %}
+
+        <div class="issue-mini-description"><span class="issue-mini-project">[{{ issue.key }}]</span> {{ issue.summary }}</div>
+
+    </div>
+{% endfor %}
