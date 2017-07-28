@@ -53,6 +53,11 @@
         setTimeout(loadTeam, 60 * 60 * 1000);
     }
 
+    function fetchExcuse() {
+        $('.excuse').load('/excuse');
+        setTimeout(fetchExcuse, 60 * 60 * 1000);
+    }
+
     function fetchIssues() {
         $('#todo').load('/issues/todo');
         $('#in_progress').load('/issues/in_progress');
@@ -68,6 +73,7 @@
         setInterval(updateTime, 1000);
         loadTeam();
         fetchIssues();
+        fetchExcuse();
     }
 
 </script>
@@ -116,24 +122,27 @@
             <div class="issue-column-title">External Test</div>
             <div id="external_test" class="issue-group"></div>
         </div>
-
     </div>
 
+    <br/>
 
-    <div class="dashboard-column">
+    <div class="excuse"></div>
+</div>
 
-        <div class="dashboard-element">
-            <div class='dashboard-title'>Achievements</div>
-            <div id="achievements"></div>
-        </div>
+<div class="dashboard-column">
 
-        <br/>
-
-        <div class="dashboard-element">
-            <div class='dashboard-title'>Team Members</div>
-            <div id='team' class="avatar-group"></div>
-        </div>
+    <div class="dashboard-element">
+        <div class='dashboard-title'>Achievements</div>
+        <div id="achievements"></div>
     </div>
+
+    <br/>
+
+    <div class="dashboard-element">
+        <div class='dashboard-title'>Team Members</div>
+        <div id='team' class="avatar-group"></div>
+    </div>
+</div>
 
 
 </body>

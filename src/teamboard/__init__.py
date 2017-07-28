@@ -6,20 +6,23 @@ import os
 import pytz
 import dateutil.parser
 
+from logging import DEBUG, INFO, WARNING, ERROR, CRITICAL
+
+
 # create logger
+def initialize_logger(level=DEBUG):
+    logger = logging.getLogger('teamboard_logger')
+    logger.setLevel(level)
 
-logger = logging.getLogger('teamboard_logger')
-logger.setLevel(logging.DEBUG)
+    formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
 
-formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+    ch = logging.StreamHandler()
+    ch.setLevel(DEBUG)
+    ch.setFormatter(formatter)
 
-ch = logging.StreamHandler()
-ch.setLevel(logging.DEBUG)
-ch.setFormatter(formatter)
+    logger.addHandler(ch)
 
-logger.addHandler(ch)
-
-logger.info("Logging initialized!")
+    logger.info("Logging initialized!")
 
 
 def teamboard_logger():

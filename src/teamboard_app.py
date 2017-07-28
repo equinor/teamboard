@@ -5,7 +5,9 @@ import yaml
 
 import os
 
-from teamboard import bundle_certificates
+from teamboard import bundle_certificates, initialize_logger, DEBUG, INFO
+
+initialize_logger(level=INFO)
 
 
 def _create_https_context(**kwargs):
@@ -39,7 +41,7 @@ def idify(name):
 
 
 initialize_static(app)
-app.register_blueprint(root_app, url_prefix='/')
+app.register_blueprint(root_app)
 app.register_blueprint(pr_app, url_prefix='/pr')
 app.register_blueprint(ach_app, url_prefix='/achievements')
 app.register_blueprint(ci_app, url_prefix='/ci')
