@@ -60,6 +60,14 @@ ci:
     url: ci.opm-project.org
     repo: All
 
+issue_tracker:
+  url: # JIRA Url
+  project: # name of the project in JIRA
+  project_field: project/key # or a customfield_xxxxx/value
+
+team:
+  - # list of team member user names
+
 tokens:
   github_token: # Create a personal access token on GitHub
   travis_token: # Use the API to create a Travis token from a GitHub token
