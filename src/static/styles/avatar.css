@@ -8,20 +8,20 @@
 }
 
 .avatar-large {
-    margin: 5px;
     vertical-align: middle;
-    border-radius: 20px;
+    margin: 5px;
     width: 40px;
     height: 40px;
+    border-radius: 20px;
     box-shadow: 2px 2px 5px 0 #aaaaaa;
 }
 
 .avatar-larger {
-    margin: 5px;
     vertical-align: middle;
-    border-radius: 30px;
+    margin: 5px;
     width: 60px;
     height: 60px;
+    border-radius: 30px;
     box-shadow: 2px 2px 5px 0 #aaaaaa;
 }
 
@@ -89,45 +89,50 @@
     margin: 5px 0 5px 0;
     display: inline-block;
     vertical-align: top;
-    width: 43px;
+    width: 45px;
     padding: 0 2px 0 2px;
 }
 
-.project {
-    display: inline-block;
+.avatar-group {
+    margin: 0;
+    padding: 0;
 }
 
-.badge {
-    position: relative;
-}
+/*.project {*/
+    /*display: inline-block;*/
+/*}*/
 
-.project-icon {
-    vertical-align: middle;
-    margin: 5px;
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-    box-shadow: 2px 2px 2px 0 #333;
-}
+/*.badge {*/
+    /*position: relative;*/
+/*}*/
 
-.badge[data-count]:after {
-    content: attr(data-count);
-    position: absolute;
-    top: -3px;
-    right: -3px;
-    font-size: .9em;
-    font-weight: bold;
-    background: #81b45c;
-    color: white;
-    width: 23px;
-    height: 23px;
-    text-align: center;
-    line-height: 23px;
-    border-radius: 50%;
-    border: 1px solid white;
-    box-shadow: 1px 1px 1px #333;
-}
+/*.project-icon {*/
+    /*vertical-align: middle;*/
+    /*margin: 5px;*/
+    /*width: 40px;*/
+    /*height: 40px;*/
+    /*border-radius: 10px;*/
+    /*box-shadow: 2px 2px 2px 0 #333;*/
+/*}*/
 
-.error-badge:after {
-    background: red !important;
-}
+/*.badge[data-count]:after {*/
+    /*content: attr(data-count);*/
+    /*position: absolute;*/
+    /*top: -3px;*/
+    /*right: -3px;*/
+    /*font-size: .9em;*/
+    /*font-weight: bold;*/
+    /*background: #81b45c;*/
+    /*color: white;*/
+    /*width: 23px;*/
+    /*height: 23px;*/
+    /*text-align: center;*/
+    /*line-height: 23px;*/
+    /*border-radius: 50%;*/
+    /*border: 1px solid white;*/
+    /*box-shadow: 1px 1px 1px #333;*/
+/*}*/
+
+/*.error-badge:after {*/
+    /*background: red !important;*/
+/*}*/

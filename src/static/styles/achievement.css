@@ -9,7 +9,7 @@
 }
 
 #progress-bar {
-    width: 200px;
+    width: 210px;
     background: hsl(0, 0%, 70%);
     position: relative;
     border: 1px solid #111111;
