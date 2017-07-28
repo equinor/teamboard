@@ -1,0 +1,6 @@
+{% for member in team %}
+    <div class="avatar-small-container">
+        <img class="avatar-medium avatar-center" src="{{ member.avatar }}">
+        <div class="avatar-small-label">{{ member.full_name }}</div>
+    </div>
+{% endfor %}
