@@ -77,7 +77,7 @@
 
             if (timestamp !== null && timestamp !== data) {
                 console.log("Timestamp changed, reloading page!");
-                window.location.reload();
+                window.location.reload(true);
             }
         });
         setTimeout(checkTimestamp, 30 * 1000);

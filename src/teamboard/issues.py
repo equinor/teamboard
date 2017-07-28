@@ -20,9 +20,10 @@ def search_for_issues(jira, jql, **kwargs):
 
 
 def project_color(project_name):
+    project_name = project_name.lower()
     projects = current_app.config.get('TEAMBOARD_SETTINGS')['projects']
     for project in projects:
-        if project_name.lower() == project.lower():
+        if project_name in projects[project]['sub_projects']:
             return projects[project]['color']
 
     return current_app.config.get('TEAMBOARD_SETTINGS')['default_project_color']
