@@ -1,12 +1,16 @@
 import re
 from http.client import HTTPConnection
 
+import time
 from flask import Blueprint, render_template
 from flask import current_app
 
 from teamboard import teamboard_logger
 
 root_app = Blueprint("root_app", __name__)
+
+_timestamp = time.time()
+teamboard_logger().info("Timestamp set to: %s" % _timestamp)
 
 
 @root_app.route("/")
@@ -36,3 +40,8 @@ def fetch_excuse():
         return match.group(2)
 
     return ""
+
+
+@root_app.route("/timestamp")
+def timestamp():
+    return str(_timestamp)

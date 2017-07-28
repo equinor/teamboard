@@ -48,9 +48,9 @@
     }
 
 
-    function loadTeam() {
+    function fetchTeam() {
         $('#team').load('/team');
-        setTimeout(loadTeam, 60 * 60 * 1000);
+        setTimeout(fetchTeam, 60 * 60 * 1000);
     }
 
     function fetchExcuse() {
@@ -67,13 +67,32 @@
         setTimeout(fetchIssues, 30 * 1000);
     }
 
+    var timestamp = null;
+
+    function checkTimestamp() {
+        $.get("/timestamp", function (data) {
+            if (timestamp === null) {
+                timestamp = data;
+            }
+
+            if (timestamp !== null && timestamp !== data) {
+                console.log("Timestamp changed, reloading page!");
+                window.location.reload();
+            }
+        });
+        setTimeout(checkTimestamp, 30 * 1000);
+    }
+
     function initialize() {
+        setInterval(updateTime, 1000);
+
         fetchAchievements();
         fetchBuilds();
-        setInterval(updateTime, 1000);
-        loadTeam();
+        fetchTeam();
         fetchIssues();
         fetchExcuse();
+
+        checkTimestamp();
     }
 
 </script>
