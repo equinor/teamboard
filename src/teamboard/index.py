@@ -37,7 +37,7 @@ def fetch_excuse():
     match = regex.search(str(response.read()))
 
     if match:
-        return match.group(2)
+        return match.group(2).replace("\\", "")
 
     return ""
 
