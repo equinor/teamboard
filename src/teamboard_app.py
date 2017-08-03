@@ -1,13 +1,11 @@
 import ssl
 import sys
-
 import yaml
-
 import os
-
 from teamboard import bundle_certificates, initialize_logger, DEBUG, INFO
+import proxied_connection
 
-initialize_logger(level=INFO)
+initialize_logger(level=DEBUG)
 
 
 def _create_https_context(**kwargs):
@@ -58,5 +56,15 @@ if __name__ == '__main__':
         settings = yaml.load(stream)
 
     app.config['TEAMBOARD_SETTINGS'] = settings
+
+    proxy_url = None
+    proxy_port = None
+    no_proxy = None
+    if 'proxy' in settings:
+        proxy_url = settings['proxy']['url']
+        proxy_port = settings['proxy']['port']
+        no_proxy = settings['proxy']['no-proxy']
+
+    proxied_connection.initialize_connection_proxy(proxy_url, proxy_port, no_proxy)
 
     app.run(debug=False, threaded=True)

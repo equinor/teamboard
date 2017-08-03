@@ -73,4 +73,11 @@ tokens:
   travis_token: # Use the API to create a Travis token from a GitHub token
   jira_token: # base64 encoded string of: username:password
 
+proxy:
+  url:
+  port:
+  no-proxy:
+    - localhost
+    - 127.0.0.1
+
 default_project_color: "#93a1a1"
