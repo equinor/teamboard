@@ -1,24 +1,9 @@
-import ssl
 import sys
 import yaml
 import os
-from teamboard import bundle_certificates, initialize_logger, DEBUG, INFO
+from teamboard import initialize_logger, DEBUG, INFO
+import certificate_context
 import proxied_connection
-
-initialize_logger(level=DEBUG)
-
-
-def _create_https_context(**kwargs):
-    cert_pem = 'certificates/bundle.pem'
-    if not os.path.exists(cert_pem):
-        bundle_certificates(name='bundle')
-
-    context = ssl.create_default_context(**kwargs)
-    context.load_verify_locations(cafile=cert_pem)
-    return context
-
-
-ssl._create_default_https_context = _create_https_context
 
 from flask import Flask
 
@@ -47,6 +32,9 @@ app.register_blueprint(team_app, url_prefix='/team')
 app.register_blueprint(issues_app, url_prefix='/issues')
 
 if __name__ == '__main__':
+    initialize_logger(level=DEBUG)
+    certificate_context.initialize_certificate_context()
+
     settings_file = "default_settings.yml"
 
     if len(sys.argv) > 1 and os.path.exists(sys.argv[1]):

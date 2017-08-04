@@ -1,11 +1,8 @@
 import calendar
 import datetime
 import logging
-
-import os
 import pytz
 import dateutil.parser
-
 from logging import DEBUG, INFO, WARNING, ERROR, CRITICAL
 
 
@@ -30,23 +27,6 @@ def teamboard_logger():
     :rtype: logging.Logger
     """
     return logging.getLogger('teamboard_logger')
-
-
-def _is_certificate(pem_file, folder='certificates'):
-    path = os.path.join(folder, pem_file)
-    return pem_file != 'cert.pem' and os.path.isfile(path) and pem_file.endswith('.pem')
-
-
-def bundle_certificates(name, path='certificates'):
-    pem_files = [pem_file for pem_file in os.listdir(path) if _is_certificate(pem_file, folder=path)]
-
-    bundle = b""
-    for pem_file in pem_files:
-        with open('certificates/%s' % pem_file, 'rb') as f:
-            bundle += f.read()
-
-    with open('certificates/%s.pem' % name, 'wb') as f:
-        f.write(bundle)
 
 
 #
