@@ -139,6 +139,8 @@ def emoji_for_review_status(review_status, pr_comments):
             state = PENDING
         elif review['state'] == 'DISMISSED':
             state = DISMISSED
+        elif review['state'] == 'CHANGES_REQUESTED':
+            state = DISMISSED
         else:
             teamboard_logger().info("Unknown review state: %s" % review['state'])
 
