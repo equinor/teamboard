@@ -1,0 +1,83 @@
+.all-rounded {
+    /*-webkit-border-radius: 0px;*/
+    /*-moz-border-radius: 0px;*/
+    border-radius: 0px;
+}
+
+.spacer {
+    display: block;
+}
+
+#progress-bar {
+    width: 210px;
+    background: hsl(0, 0%, 70%);
+    position: relative;
+    border: 1px solid #111111;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#progress-bar-percentage {
+    background: #a5de6f;
+    padding: 5px 0;
+    margin: 2px;
+    color: #000;
+    text-align: center;
+    font-size: small;
+    height: 12px;
+    max-width: 98%;
+}
+
+#progress-bar-percentage span {
+    display: inline-block;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    vertical-align: middle;
+}
+
+.achievement {
+    width: 295px;
+    margin-bottom: 10px;
+}
+
+.achievement img {
+    /*display: block;*/
+    margin-left: 5px;
+    /*margin-right: auto;*/
+    display: inline-block;
+    width: auto;
+    height: 35px;
+    /*margin-bottom: 10px;*/
+    vertical-align: middle;
+}
+
+@keyframes green-blink {
+    0% {
+        background-color: #a5de6f;
+    }
+    50% {
+        background-color: #c7ff8d;
+
+        box-shadow: 0 0 10px 5px #c7ff8d;
+    }
+    100% {
+        background-color: #a5de6f;
+    }
+}
+
+.green-blink {
+    animation: green-blink 1.5s linear infinite;
+}
+
+@font-face {
+    font-family: "Noto Emoji Regular";
+    src: url('fonts/NotoColorEmoji.ttf') format('truetype');
+}
+
+.achievement-emoji {
+    font-family: "Noto Emoji Regular";
+    font-size: x-large;
+    vertical-align: middle;
+    margin-left: 10px;
+}

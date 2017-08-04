@@ -1,0 +1,21 @@
+{% for issue in issues %}
+
+    <div class="issue">
+        <div class="issue-project-color" style="background-color: {{ issue.color }}"></div>
+
+        <div class="issue-avatar-group">
+            <img class="avatar-medium" src="{{ issue.assignee_avatar }}"/>
+            <!--<br/>-->
+            {#            <img class="issue-flagged" ng-src="{{flagForIssue(issue)}}" ng-hide="flagForIssue(issue) == null"/>#}
+        </div>
+
+        <div class="issue-description">
+            {% if issue.flagged %}
+                <span class="issue-flagged">&#x1f6a9;</span> <!-- Flag emoji: &#x1f6a9; -->
+            {% endif %}
+            {{ issue.summary }}
+        </div>
+        <div class="issue-project">{{ issue.key }} {{ issue.project }}</div>
+    </div>
+
+{% endfor %}

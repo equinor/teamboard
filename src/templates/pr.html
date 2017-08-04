@@ -1,0 +1,39 @@
+{% macro statusStyle(status) -%}
+    {% if status == 'success' %}
+        repo-success
+    {% elif status == 'failure' %}
+        repo-failure repo-red-blink
+    {% else %}
+        repo-in-progress repo-yellow-blink
+    {% endif %}
+{%- endmacro %}
+
+<div class="repo-block">
+    <div class="repo-group-avatar">
+        <div class="repo-group">
+            <img class="repo-avatar" src="{{ pr.avatar }}"/>
+
+            <div class="repo-review-state">
+                {{ reviewState(pr.review_status, pr.pr_comments)|safe }}
+            </div>
+        </div>
+        <div class="repo-project" style="background-color: {{ projectColor(project(pr.repo)) }}">
+            {{ project(pr.repo) }}
+        </div>
+    </div>
+
+    <div class="repo-group-info">
+        <div class="repo-title">
+            {{ pr.repo }} #{{ pr.number }}:
+        </div>
+
+        <div class="repo-description">
+            {{ pr.title }}
+        </div>
+
+        <div class="repo-description">
+            <span class="repo-state {{ statusStyle(pr.status) }}">{{ pr.status }}</span>
+            <span class="repo-time">Last updated: {{ prettyTime(pr.updated) }}</span>
+        </div>
+    </div>
+</div>

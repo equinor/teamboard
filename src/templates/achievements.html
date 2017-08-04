@@ -1,0 +1,13 @@
+{% for achievement in achievements %}
+    <div class="achievement">
+        <div id="progress-bar" class="all-rounded">
+            <div id="progress-bar-percentage" class="all-rounded {{ achievement.style }}"
+                 style="width: {{ achievement.progress_percent }}%">
+                <span>{{ achievement.progress }} / {{ achievement.count }}</span>
+            </div>
+
+        </div>
+
+        <span class="achievement-emoji"> {{ achievement.name|safe }}</span>
+    </div>
+{% endfor %}
