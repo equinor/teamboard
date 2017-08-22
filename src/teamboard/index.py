@@ -2,6 +2,8 @@ import re
 from http.client import HTTPConnection
 
 import time
+
+import sys
 from flask import Blueprint, render_template
 from flask import current_app
 
@@ -17,6 +19,12 @@ teamboard_logger().info("Timestamp set to: %s" % _timestamp)
 def index():
     settings = current_app.config.get('TEAMBOARD_SETTINGS')
     return render_template('index.html', ci=settings['ci'])
+
+
+@root_app.route("/shutdown")
+def shutdown():
+    teamboard_logger().warning("Shutting down!")
+    sys.exit(0)
 
 
 @root_app.route("/excuse")

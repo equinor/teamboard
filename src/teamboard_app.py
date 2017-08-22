@@ -55,4 +55,4 @@ if __name__ == '__main__':
 
     proxied_connection.initialize_connection_proxy(proxy_url, proxy_port, no_proxy)
 
-    app.run(debug=False, threaded=True)
+    app.run(host='0.0.0.0', debug=False, threaded=True)
