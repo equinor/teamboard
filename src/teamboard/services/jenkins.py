@@ -6,10 +6,15 @@ class Jenkins(API):
         extra_headers = {
         }
 
+        path = None
+        if '/' in url:
+            url, path = url.split("/", maxsplit=1)
+
         props = ConnectionProperties(
             api_url=kwargs.pop('api_url', '%s' % url),
             secure_http=True,
             extra_headers=extra_headers,
+            url_prefix=path
         )
 
         self.setClient(Client(*args, **kwargs))
