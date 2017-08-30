@@ -4,8 +4,10 @@ from teamboard import teamboard_logger
 
 
 def no_proxy(host, no_proxy_list):
+    host = host.lower()
     for item in no_proxy_list:
-        if host.endswith(item):
+        item = item.lower()
+        if item in host:
             return True
     return False
 
