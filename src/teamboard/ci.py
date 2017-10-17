@@ -55,14 +55,16 @@ def fetch_travis_ci(build):
     repo = build['repo']
     status, repo_data = t.repos[repo].get()
 
-    if status != 200:
-        teamboard_logger().warning("Unable to get CI status for repo %s" % repo)
-        teamboard_logger().debug("Response status: %s - %s" % (status, t.getheaders()))
-
     result = {
         'status': SUCCESS,
         'jobs': []
     }
+
+    if status != 200:
+        teamboard_logger().warning("Unable to get CI status for repo %s" % repo)
+        teamboard_logger().debug("Response status: %s - %s" % (status, t.getheaders()))
+        result['status'] = UNKNOWN
+        return result
 
     for project in repo_data['repos']:
         if project['active']:
@@ -88,14 +90,16 @@ def fetch_jenkins_ci(build):
     repo = build['repo']
     status, ci_data = j.view[repo].api.json.get()
 
-    if status != 200:
-        teamboard_logger().warning("Unable to get CI status for repo %s" % repo)
-        teamboard_logger().debug("Response status: %s - %s" % (status, j.getheaders()))
-
     result = {
         'status': SUCCESS,
         'jobs': []
     }
+
+    if status != 200:
+        teamboard_logger().warning("Unable to get CI status for repo %s" % repo)
+        teamboard_logger().debug("Response status: %s - %s" % (status, j.getheaders()))
+        result['status'] = UNKNOWN
+        return result
 
     for job in ci_data['jobs']:
 
