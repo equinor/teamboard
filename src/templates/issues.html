@@ -1,12 +1,25 @@
+{% if show_age is not defined %}
+    {% set show_age = False %}
+{% endif %}
+
 {% for issue in issues %}
 
     <div class="issue">
         <div class="issue-project-color" style="background-color: {{ issue.color }}"></div>
 
         <div class="issue-avatar-group">
-            <img class="avatar-medium" src="{{ issue.assignee_avatar }}"/>
-            <!--<br/>-->
-            {#            <img class="issue-flagged" ng-src="{{flagForIssue(issue)}}" ng-hide="flagForIssue(issue) == null"/>#}
+            {% if show_age %}
+                {% if issue.age <= 3 %}
+                    {% set age_class = 'issue-age-new' %}
+                {% elif issue.age <= 10 %}
+                    {% set age_class = 'issue-age-stale' %}
+                {% else %}
+                    {% set age_class = 'issue-age-overdue' %}
+                {% endif %}
+                <img class="avatar-medium {{ age_class }}" src="{{ issue.assignee_avatar }}"/>
+            {% else %}
+                <img class="avatar-medium" src="{{ issue.assignee_avatar }}"/>
+            {% endif %}
         </div>
 
         <div class="issue-description">

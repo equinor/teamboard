@@ -1,10 +1,20 @@
 from flask import Blueprint, render_template
 from flask import current_app
 
+import dateutil.parser
+from datetime import date, timedelta
+
 from teamboard import teamboard_logger
 from teamboard.services.jira import Jira
 
 issues_app = Blueprint("issues_app", __name__)
+
+
+def calculate_age_in_work_days(date_string):
+    from_date = dateutil.parser.parse(date_string).date()
+    to_date = date.today()
+    day_generator = (from_date + timedelta(x + 1) for x in range((to_date - from_date).days))
+    return sum(1 for day in day_generator if day.weekday() < 5)
 
 
 def search_for_issues(jira, jql, **kwargs):
@@ -29,6 +39,19 @@ def project_color(project_name):
     return current_app.config.get('TEAMBOARD_SETTINGS')['default_project_color']
 
 
+def issue_age(issue):
+    changelog = reversed(issue['changelog']['histories'])
+
+    age = 0
+    for change in changelog:
+        for item in change['items']:
+            if item['field'] == 'status' and item['toString'] == 'In Progress':
+                age_in_days = calculate_age_in_work_days(change['created'])
+                age = age_in_days if age == 0 else max(age, age_in_days)  # oldest or newest?
+
+    return age
+
+
 def process_issue(issue, project_field, value_node):
     result = {
         'key': issue['key'],
@@ -37,7 +60,8 @@ def process_issue(issue, project_field, value_node):
         'assignee_full_name': '',
         'assignee_avatar': '',
         'project': issue['fields'][project_field][value_node],
-        'flagged': issue['fields']['customfield_10200'] is not None
+        'flagged': issue['fields']['customfield_10200'] is not None,
+        'age': issue_age(issue)
     }
 
     result['color'] = project_color(result['project'])
@@ -63,7 +87,7 @@ def fetch_issues(status):
 
     jira = Jira(url=url, basic_token=token)
 
-    issues = search_for_issues(jira, jql=jql, fields=fields)
+    issues = search_for_issues(jira, jql=jql, fields=fields, expand='changelog')
 
     return [process_issue(issue, field, value_node) for issue in issues]
 
@@ -77,7 +101,7 @@ def fetch_todo():
 @issues_app.route("/in_progress")
 def fetch_in_progress():
     issues = fetch_issues('in progress')
-    return render_template('issues.html', issues=issues)
+    return render_template('issues.html', issues=issues, show_age=True)
 
 
 @issues_app.route("/ready_for_review")
