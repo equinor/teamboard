@@ -133,3 +133,16 @@
     min-height: inherit;
     padding: 0;
 }
+
+.issue-age-new {
+    /*border: 2px solid transparent; !* #a5de6f green *!*/
+    border: 2px solid #a5de6f; /* #a5de6f green */
+}
+
+.issue-age-stale {
+    border: 2px solid #ffe057;
+}
+
+.issue-age-overdue {
+    border: 2px solid #ff7375;
+}
