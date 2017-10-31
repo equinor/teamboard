@@ -85,7 +85,15 @@ def fetch_travis_ci(build):
 
 
 def fetch_jenkins_ci(build):
-    j = Jenkins(build['url'])
+    token = {
+        'user': None,
+        'token': None
+    }
+
+    if build['url'] in current_app.config['TEAMBOARD_SETTINGS']['tokens']:
+        token = current_app.config['TEAMBOARD_SETTINGS']['tokens'][build['url']]
+
+    j = Jenkins(build['url'], user=token['user'], token=token['token'])
 
     repo = build['repo']
     status, ci_data = j.view[repo].api.json.get()
