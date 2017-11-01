@@ -4,14 +4,15 @@ from agithub.base import API, ConnectionProperties, Client
 
 
 class Jira(API):
-    def __init__(self, url, user=None, password=None, basic_token=None, **kwargs):
+    def __init__(self, url, user=None, passwd=None, basic_token=None, **kwargs):
         extra_headers = {
             'accept': 'application/json',
             'content-type': 'application/json'
         }
 
-        if user is not None and password is not None:
-            basic_token = base64_encode(bytes("%s:%s" % (user, password)))
+        if user is not None and passwd is not None:
+            user_pass = bytes("%s:%s" % (user, passwd), 'utf-8')
+            basic_token = base64_encode(user_pass)
 
         if basic_token is not None:
             auth = "Basic %s" % str(basic_token)
