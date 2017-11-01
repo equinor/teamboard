@@ -1,14 +1,21 @@
 from agithub.base import API, ConnectionProperties, Client
+from encodings.base64_codec import base64_encode
 
 
 class Jenkins(API):
-    def __init__(self, url, *args, **kwargs):
+    def __init__(self, url, user=None, token=None, **kwargs):
         extra_headers = {
         }
 
         path = None
         if '/' in url:
             url, path = url.split("/", maxsplit=1)
+
+        if user is not None and token is not None:
+            user_token = bytes("%s:%s" % (user, token), 'utf-8')
+            basic_token = base64_encode(user_token)
+            auth = "Basic %s" % str(basic_token)
+            extra_headers['authorization'] = auth
 
         props = ConnectionProperties(
             api_url=kwargs.pop('api_url', '%s' % url),
@@ -17,7 +24,7 @@ class Jenkins(API):
             url_prefix='/%s' % path
         )
 
-        self.setClient(Client(*args, **kwargs))
+        self.setClient(Client(**kwargs))
         self.setConnectionProperties(props)
 
 
