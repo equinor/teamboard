@@ -65,13 +65,18 @@ issue_tracker:
   project: # name of the project in JIRA
   project_field: project/key # or a customfield_xxxxx/value
 
-team:
-  - # list of team member user names
+team: # list of team member user names
+  -
+    name: Full name
+    slack: r2d2 # user name on Slack
+    github: ~ # user name on GitHub
+  - #...
 
 tokens:
   github_token: # Create a personal access token on GitHub
   travis_token: # Use the API to create a Travis token from a GitHub token
   jira_token: # base64 encoded string of: username:password
+  slack_token: # Bot token from Slack
 
 proxy:
   url:
