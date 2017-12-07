@@ -7,12 +7,12 @@ import sys
 from flask import Blueprint, render_template
 from flask import current_app
 
-from teamboard import teamboard_logger
+from teamboard import teamboard_logger as logger
 
 root_app = Blueprint("root_app", __name__)
 
 _timestamp = time.time()
-teamboard_logger().info("Timestamp set to: %s" % _timestamp)
+logger().info("Timestamp set to: %s" % _timestamp)
 
 
 @root_app.route("/")
@@ -23,7 +23,7 @@ def index():
 
 @root_app.route("/shutdown")
 def shutdown():
-    teamboard_logger().warning("Shutting down!")
+    logger().warning("Shutting down!")
     sys.exit(0)
 
 
@@ -36,9 +36,9 @@ def fetch_excuse():
 
     status = response.status
     if status != 200:
-        teamboard_logger().warning("Unable to fetch excuse!")
-        teamboard_logger().debug("Response status: %s - %s" % (status, response.getheaders()))
-        teamboard_logger().debug("-------------->: %s" % response.read())
+        logger().warning("Unable to fetch excuse!")
+        logger().debug("Response status: %s - %s" % (status, response.getheaders()))
+        logger().debug("-------------->: %s" % response.read())
         return ""
 
     regex = re.compile("<a(.+?)>(.+?)</a>")
